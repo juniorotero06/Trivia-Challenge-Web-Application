@@ -5,9 +5,9 @@ const LOADING = "LOADING";
 const GET_QUESTIONS = "GET_QUESTIONS";
 //Action Creators
 export function getQuestions() {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch({ type: LOADING });
-    return axios
+    return await axios
       .get("https://opentdb.com/api.php?amount=10&type=boolean")
       .then((obj) => {
         console.log("quiz: ", obj);

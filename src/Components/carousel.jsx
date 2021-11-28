@@ -2,29 +2,31 @@ import React from "react";
 
 export function ControlledCarousel(props) {
   return (
-    <div class="carousel-item active">
-      <span class="d-block w-50 h2">{props.question}</span>
-      <div class="form-check form-check-inline">
+    <div className="carousel-item active">
+      <p className="d-block w-50 h4">Categoria: {props.category}</p>
+      <p className="d-block w-50 h4">Dificultad: {props.difficulty}</p>
+      <span className="d-block w-50 h2 mt-3">{props.question}</span>
+      <div className="form-check form-check-inline">
         <input
-          class="form-check-input"
+          className="form-check-input"
           type="radio"
           name="inlineRadioOptions"
           id="inlineRadio1"
           value="option1"
         />
-        <label class="form-check-label" for="inlineRadio1">
+        <label className="form-check-label" htmlFor="inlineRadio1">
           True
         </label>
       </div>
-      <div class="form-check form-check-inline">
+      <div className="form-check form-check-inline">
         <input
-          class="form-check-input"
+          className="form-check-input"
           type="radio"
           name="inlineRadioOptions"
           id="inlineRadio2"
           value="option2"
         />
-        <label class="form-check-label" for="inlineRadio2">
+        <label className="form-check-label" htmlFor="inlineRadio2">
           False
         </label>
       </div>
