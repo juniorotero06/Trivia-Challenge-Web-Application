@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getQuestions } from "../redux/actions";
 import { connect } from "react-redux";
 import LoadingComponent from "../Components/loading";
-import { ControlledCarousel } from "../Components/carousel";
 import { Link } from "react-router-dom";
 
 function ThirdPage(props) {
@@ -10,10 +9,12 @@ function ThirdPage(props) {
   let now = index * 10;
   useEffect(() => {
     props.getQuestions();
+    console.log(props.questions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div>
+      {/*/////////// Carrusel ///////////////*/}
       <div
         id="carouselExampleControlsNoTouching"
         className="carousel slide"
@@ -26,19 +27,56 @@ function ThirdPage(props) {
               <LoadingComponent />
             </div>
           ) : props.questions.length > 0 ? (
-            <ControlledCarousel
-              category={props.questions[index].category}
-              difficulty={props.questions[index].difficulty}
-              question={props.questions[index].question}
-              correctAnswer={props.questions[index].correct_answer}
-              incorrectAnswers={props.questions[index].incorrect_answers[0]}
-            />
-          ) : null}
+            props.questions.map((p, i) => {
+              return (
+                <div
+                  key={i}
+                  className={
+                    i === index ? "carousel-item active" : "carousel-item"
+                  }
+                >
+                  <div>
+                    <p className="d-block h4">{p.question}</p>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id={`inlineRadio${index}`}
+                      value="True"
+                    />
+                    <label className="form-check-label" htmlFor="inlineRadio1">
+                      True
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id={`inlineRadio${index + 2}`}
+                      value="False"
+                    />
+                    <label className="form-check-label" htmlFor="inlineRadio2">
+                      False
+                    </label>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <h1>no entra nada </h1>
+          )}
         </div>
+        {/*/////////// Radio Boton ///////////////*/}
+
+        {/* <RadioComponent index={index} /> */}
+        {/*/////////// Boton de prev ///////////////*/}
         <button
           className="carousel-control-prev"
           disabled={index === 0}
-          type="button"
+          type="submit"
           data-bs-target="#carouselExampleControlsNoTouching"
           data-bs-slide="prev"
           onClick={() => {
@@ -53,10 +91,11 @@ function ThirdPage(props) {
           ></span>
           <span className="visually-hidden">Previous</span>
         </button>
+        {/*/////////// Boton de next ///////////////*/}
         <button
           className="carousel-control-next"
           disabled={index === 9}
-          type="button"
+          type="submit"
           data-bs-target="#carouselExampleControlsNoTouching"
           data-bs-slide="next"
           onClick={() => {
@@ -71,6 +110,7 @@ function ThirdPage(props) {
           ></span>
           <span className="visually-hidden">Next</span>
         </button>
+        {/*/////////// pregunta # ///////////////*/}
         <p className="h4 mt-3">Pregunta Numero #{index + 1}</p>
         {index === 9 ? (
           <Link to="/fourth-page">
@@ -80,6 +120,7 @@ function ThirdPage(props) {
           </Link>
         ) : null}
       </div>
+      {/*/////////// Progress Bar ///////////////*/}
       <div className="mt-3">
         <div className="progress">
           {index > 7 ? (
