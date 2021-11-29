@@ -9,7 +9,6 @@ function ThirdPage(props) {
   let now = index * 10;
   useEffect(() => {
     props.getQuestions();
-    console.log(props.questions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -36,7 +35,9 @@ function ThirdPage(props) {
                   }
                 >
                   <div>
-                    <p className="d-block h4">{p.question}</p>
+                    <p className="d-block h4">Categoria: {p.category}</p>
+                    <p className="d-block h4">Dificultad: {p.difficulty}</p>
+                    <p className="d-block h2">{p.question}</p>
                   </div>
                   <div className="form-check form-check-inline">
                     <input
@@ -66,12 +67,9 @@ function ThirdPage(props) {
               );
             })
           ) : (
-            <h1>no entra nada </h1>
+            <h1>no hay preguntas</h1>
           )}
         </div>
-        {/*/////////// Radio Boton ///////////////*/}
-
-        {/* <RadioComponent index={index} /> */}
         {/*/////////// Boton de prev ///////////////*/}
         <button
           className="carousel-control-prev"
