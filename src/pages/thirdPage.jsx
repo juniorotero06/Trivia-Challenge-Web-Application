@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import LoadingComponent from "../Components/loading";
+import { numResults } from "../redux/actions";
+import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 function ThirdPage(props) {
   let history = useHistory();
   const [index, setIndex] = useState(0);
+  const [result, setResult] = useState(0);
   let now = index * 10;
   let chekedArray = [];
   function radioCheked(e) {
@@ -18,6 +20,9 @@ function ThirdPage(props) {
       if (cbChecked != null) {
         chekedArray.push(cbChecked.value);
       }
+    }
+    if (chekedArray[0] === props.questions[index].correct_answer) {
+      setResult(result + 1);
     }
     console.log("check: ", chekedArray);
   }
@@ -32,6 +37,10 @@ function ThirdPage(props) {
         chekedArray.push(cbChecked.value);
       }
     }
+    if (chekedArray[0] === props.questions[index].correct_answer) {
+      setResult(result + 1);
+    }
+    props.numResults(result);
     history.push("/fourth-page");
     console.log("check: ", chekedArray);
   }
@@ -188,4 +197,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ThirdPage);
+function mapDispatchToProps(dispatch) {
+  return {
+    numResults: (num) => dispatch(numResults(num)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ThirdPage);

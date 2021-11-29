@@ -5,6 +5,7 @@ const LOADING = "LOADING";
 const GET_QUESTIONS = "GET_QUESTIONS";
 const NAME_AUTH = "NAME_AUTH";
 const RETRY_QUEST = "RETRY_QUEST";
+const NUM_RESULTS = "NUM_RESULTS";
 //Action Creators
 export function getQuestions() {
   return async function (dispatch) {
@@ -44,4 +45,11 @@ export function retryQuest() {
   };
 }
 
-export { LOADING, GET_QUESTIONS, NAME_AUTH, RETRY_QUEST };
+export function numResults(num) {
+  return {
+    type: NUM_RESULTS,
+    payload: num,
+  };
+}
+
+export { LOADING, GET_QUESTIONS, NAME_AUTH, RETRY_QUEST, NUM_RESULTS };
