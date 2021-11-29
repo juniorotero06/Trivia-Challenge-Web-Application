@@ -24,7 +24,6 @@ function ThirdPage(props) {
     if (chekedArray[0] === props.questions[index].correct_answer) {
       setResult(result + 1);
     }
-    console.log("check: ", chekedArray);
   }
   function finishRadioCheked(e) {
     e.preventDefault();
@@ -42,7 +41,6 @@ function ThirdPage(props) {
     }
     props.numResults(result);
     history.push("/fourth-page");
-    console.log("check: ", chekedArray);
   }
   return (
     <div>
