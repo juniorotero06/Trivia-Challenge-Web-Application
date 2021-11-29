@@ -26,4 +26,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapDispatchToProps)(FourthPage);
+export default connect(null, mapDispatchToProps)(FourthPage);

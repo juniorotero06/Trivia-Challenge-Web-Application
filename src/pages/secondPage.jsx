@@ -58,10 +58,10 @@ function SecondPage(props) {
   );
 }
 
-function mapDispacthToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     nameAuth: () => dispatch(nameAuth()),
   };
 }
 
-export default connect(mapDispacthToProps)(SecondPage);
+export default connect(null, mapDispatchToProps)(SecondPage);
