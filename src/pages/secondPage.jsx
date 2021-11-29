@@ -3,8 +3,10 @@ import logo from "../logo.png";
 import validate from "../Components/validate";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router";
+import { connect } from "react-redux";
+import { nameAuth } from "../redux/actions";
 
-export default function SecondPage() {
+function SecondPage(props) {
   let history = useHistory();
   const [input, setInput] = useState({
     name: "",
@@ -23,8 +25,7 @@ export default function SecondPage() {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    const name = e.target.idName.value;
-    console.log(name);
+    props.nameAuth();
     history.push("/third-page");
   };
 
@@ -49,10 +50,18 @@ export default function SecondPage() {
             {error.name && <h6>{error.name}</h6>}
           </Form.Text>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button disabled={input.name === ""} variant="primary" type="submit">
           ¡VAMOS!
         </Button>
       </Form>
     </div>
   );
 }
+
+function mapDispacthToProps(dispatch) {
+  return {
+    nameAuth: () => dispatch(nameAuth()),
+  };
+}
+
+export default connect(mapDispacthToProps)(SecondPage);

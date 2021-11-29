@@ -3,6 +3,8 @@ import Swal from "sweetalert2";
 //Constantes
 const LOADING = "LOADING";
 const GET_QUESTIONS = "GET_QUESTIONS";
+const NAME_AUTH = "NAME_AUTH";
+const RETRY_QUEST = "RETRY_QUEST";
 //Action Creators
 export function getQuestions() {
   return async function (dispatch) {
@@ -31,4 +33,16 @@ export function getQuestions() {
   };
 }
 
-export { LOADING, GET_QUESTIONS };
+export function nameAuth() {
+  return {
+    type: NAME_AUTH,
+  };
+}
+
+export function retryQuest() {
+  return {
+    type: RETRY_QUEST,
+  };
+}
+
+export { LOADING, GET_QUESTIONS, NAME_AUTH, RETRY_QUEST };

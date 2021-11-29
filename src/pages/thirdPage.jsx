@@ -3,6 +3,7 @@ import { getQuestions } from "../redux/actions";
 import { connect } from "react-redux";
 import LoadingComponent from "../Components/loading";
 import { ControlledCarousel } from "../Components/carousel";
+import { Link } from "react-router-dom";
 
 function ThirdPage(props) {
   const [index, setIndex] = useState(0);
@@ -36,6 +37,7 @@ function ThirdPage(props) {
         </div>
         <button
           className="carousel-control-prev"
+          disabled={index === 0}
           type="button"
           data-bs-target="#carouselExampleControlsNoTouching"
           data-bs-slide="prev"
@@ -53,6 +55,7 @@ function ThirdPage(props) {
         </button>
         <button
           className="carousel-control-next"
+          disabled={index === 9}
           type="button"
           data-bs-target="#carouselExampleControlsNoTouching"
           data-bs-slide="next"
@@ -69,10 +72,17 @@ function ThirdPage(props) {
           <span className="visually-hidden">Next</span>
         </button>
         <p className="h4 mt-3">Pregunta Numero #{index + 1}</p>
+        {index === 9 ? (
+          <Link to="/fourth-page">
+            <button type="button" className="btn btn-success">
+              Finalizar
+            </button>
+          </Link>
+        ) : null}
       </div>
       <div className="mt-3">
         <div className="progress">
-          {now >= 80 ? (
+          {index > 7 ? (
             <div
               className="progress-bar progress-bar-striped progress-bar-animated bg-warning"
               role="progressbar"

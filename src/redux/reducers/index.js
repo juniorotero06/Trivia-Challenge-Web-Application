@@ -1,8 +1,9 @@
-import { LOADING, GET_QUESTIONS } from "../actions";
+import { LOADING, GET_QUESTIONS, NAME_AUTH, RETRY_QUEST } from "../actions";
 
 const initialState = {
   questions: [],
   loading: false,
+  auth: false,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -17,6 +18,18 @@ export default function rootReducer(state = initialState, action) {
       ...state,
       loading: false,
       questions: action.payload,
+    };
+  }
+  if (action.type === NAME_AUTH) {
+    return {
+      ...state,
+      auth: true,
+    };
+  }
+  if (action.type === RETRY_QUEST) {
+    return {
+      ...state,
+      auth: false,
     };
   }
   return state;
