@@ -4,7 +4,7 @@ import validate from "../Components/validate";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { connect } from "react-redux";
-import { nameAuth } from "../redux/actions";
+import { nameAuth, getQuestions } from "../redux/actions";
 
 function SecondPage(props) {
   let history = useHistory();
@@ -25,6 +25,7 @@ function SecondPage(props) {
   };
   const submitHandler = (e) => {
     e.preventDefault();
+    props.getQuestions();
     props.nameAuth();
     history.push("/third-page");
   };
@@ -61,6 +62,7 @@ function SecondPage(props) {
 function mapDispatchToProps(dispatch) {
   return {
     nameAuth: () => dispatch(nameAuth()),
+    getQuestions: () => dispatch(getQuestions()),
   };
 }
 

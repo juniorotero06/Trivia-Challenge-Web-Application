@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { getQuestions } from "../redux/actions";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import LoadingComponent from "../Components/loading";
 import { Link } from "react-router-dom";
@@ -7,10 +6,6 @@ import { Link } from "react-router-dom";
 function ThirdPage(props) {
   const [index, setIndex] = useState(0);
   let now = index * 10;
-  useEffect(() => {
-    props.getQuestions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     <div>
       {/*/////////// Carrusel ///////////////*/}
@@ -35,9 +30,11 @@ function ThirdPage(props) {
                   }
                 >
                   <div>
-                    <p className="d-block h4">Categoria: {p.category}</p>
-                    <p className="d-block h4">Dificultad: {p.difficulty}</p>
-                    <p className="d-block h2">{p.question}</p>
+                    <p className="d-block h5 mt-3">Categoria: {p.category}</p>
+                    <p className="d-block h5 mt-3">
+                      Dificultad: {p.difficulty}
+                    </p>
+                    <p className="d-block h4 mt-3">{p.question}</p>
                   </div>
                   <div className="form-check form-check-inline">
                     <input
@@ -110,6 +107,7 @@ function ThirdPage(props) {
         </button>
         {/*/////////// pregunta # ///////////////*/}
         <p className="h4 mt-3">Pregunta Numero #{index + 1}</p>
+        {/*//////////////Btn Finalizar ///////////*/}
         {index === 9 ? (
           <Link to="/fourth-page">
             <button type="button" className="btn btn-success">
@@ -121,7 +119,7 @@ function ThirdPage(props) {
       {/*/////////// Progress Bar ///////////////*/}
       <div className="mt-3">
         <div className="progress">
-          {index > 7 ? (
+          {index > 6 ? (
             <div
               className="progress-bar progress-bar-striped progress-bar-animated bg-warning"
               role="progressbar"
@@ -153,10 +151,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchtoProps(dispatch) {
-  return {
-    getQuestions: () => dispatch(getQuestions()),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchtoProps)(ThirdPage);
+export default connect(mapStateToProps)(ThirdPage);
