@@ -27,18 +27,7 @@ function ThirdPage(props) {
   }
   function finishRadioCheked(e) {
     e.preventDefault();
-    if (index < props.questions.length) {
-      setIndex(index + 1);
-      var cbChecked = document.querySelector(
-        '[name="inlineRadioOptions"]:checked'
-      );
-      if (cbChecked != null) {
-        chekedArray.push(cbChecked.value);
-      }
-    }
-    if (chekedArray[0] === props.questions[index].correct_answer) {
-      setResult(result + 1);
-    }
+    radioCheked(e);
     props.numResults(result);
     history.push("/fourth-page");
   }
