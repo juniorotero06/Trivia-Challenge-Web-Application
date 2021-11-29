@@ -12,7 +12,6 @@ export function getQuestions() {
     return await axios
       .get("https://opentdb.com/api.php?amount=10&type=boolean")
       .then((obj) => {
-        console.log("quiz: ", obj);
         dispatch({ type: GET_QUESTIONS, payload: obj.data.results });
       })
       .catch((error) => {
